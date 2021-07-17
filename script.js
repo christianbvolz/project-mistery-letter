@@ -19,14 +19,13 @@ const group4 = ['skewright', 'skewleft'];
 
 function generateStyle() {
   let result = '';
-  const groupSort = [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3), Math.floor(Math.random() * 2), Math.floor(Math.random() * 2)];
   let arraygroup = [group1, group2, group3, group4];
-  // for (let i = 0; i < Math.floor(Math.random() * 3) + 2; i += 1) {
-    for (let i = 0; i < 4; i += 1) {
+  for (let i = 0; i < Math.floor(Math.random() * 3) + 2; i += 1) {
     const randomGroup = Math.floor(Math.random() * arraygroup.length);
     result += arraygroup[randomGroup][Math.floor(Math.random() * arraygroup[randomGroup].length)] + ' ';
     arraygroup.splice(randomGroup, 1);
   };
+  result = result.slice(0, -1);
   result = result.split(' ');
   result = result.join(' ');
   return result;
