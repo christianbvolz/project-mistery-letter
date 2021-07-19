@@ -1,15 +1,15 @@
 function geraCarta(value) {
-  document.getElementById('envelope').removeChild(document.getElementById('carta-gerada'));
   const input = value.split(' ');
   const envelope = document.getElementById('envelope');
   const paragraph = document.createElement('p');
   const contador = document.getElementById('carta-contador');
+  envelope.removeChild(document.getElementById('carta-gerada'));
   contador.innerHTML = input.length;
   paragraph.id = 'carta-gerada';
   envelope.appendChild(paragraph);
-  for (const word of input) {
+  for (let index = 0; index < input.length; index += 1) {
     const span = document.createElement('span');
-    span.innerHTML = word;
+    span.innerHTML = input[index];
     paragraph.appendChild(span);
   }
 }
@@ -21,12 +21,13 @@ const group4 = ['skewright', 'skewleft'];
 
 function generateStyle() {
   let result = '';
-  let arraygroup = [group1, group2, group3, group4];
+  const arraygroup = [group1, group2, group3, group4];
   for (let i = 0; i < Math.floor(Math.random() * 3) + 2; i += 1) {
     const randomGroup = Math.floor(Math.random() * arraygroup.length);
-    result += arraygroup[randomGroup][Math.floor(Math.random() * arraygroup[randomGroup].length)] + ' ';
+    const group = arraygroup[randomGroup];
+    result += `${group[Math.floor(Math.random() * group.length)]} `;
     arraygroup.splice(randomGroup, 1);
-  };
+  }
   result = result.slice(0, -1);
   result = result.split(' ');
   result = result.join(' ');
@@ -35,9 +36,10 @@ function generateStyle() {
 
 function setStyle() {
   const envelope = document.querySelectorAll('#carta-gerada span');
-  envelope.forEach(function (element, index, array) {
-    element.className = generateStyle();
-  })
+  envelope.forEach((element) => {
+    const style = element;
+    style.className = generateStyle();
+  });
 }
 
 function validaCarta() {
@@ -45,7 +47,7 @@ function validaCarta() {
   let checkInput = false;
   const input = valueInput;
   if (valueInput) {
-    valueInput = valueInput.split(' ').forEach(function (element, index, array) {
+    valueInput = valueInput.split(' ').forEach((element) => {
       if (element) {
         checkInput = true;
       }
@@ -55,7 +57,7 @@ function validaCarta() {
     geraCarta(input);
   } else {
     document.getElementById('carta-gerada').innerHTML = 'Por favor, digite o conteúdo da carta.';
-    document.getElementById('carta-texto').value = '';
+    valueInput = '';
   }
 }
 
