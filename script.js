@@ -3,6 +3,8 @@ function geraCarta(value) {
   const input = value.split(' ');
   const envelope = document.getElementById('envelope');
   const paragraph = document.createElement('p');
+  const contador = document.getElementById('carta-contador');
+  contador.innerHTML = input.length;
   paragraph.id = 'carta-gerada';
   envelope.appendChild(paragraph);
   for (const word of input) {
